@@ -4,7 +4,7 @@
 * A key with no password added in gitlab. E.g. jenkins user or your own key.
 * oc command must be available
 ```
-sudo ln $(find ~/.minishift -name oc -type f | tail -1) /usr/local/bin/oc
+sudo ln -sf $(find ~/.minishift -name oc -type f | tail -1) /usr/local/bin/oc
 ```
 * Must have a clone of git@gitlab.adelaide.edu.au:web-team/s2i-shepherd-drupal.git and be in that directory.
 
