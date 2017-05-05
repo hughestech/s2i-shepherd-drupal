@@ -1,5 +1,8 @@
 
-# Creating a basic S2I builder image  
+# Creating a basic S2I builder image
+
+## If you just want to use this image to launch projects, then you should read OPENSHIFT_QUICKSTART.md,
+the following information is more for working on this project directly.
 
 ## Getting started  
 

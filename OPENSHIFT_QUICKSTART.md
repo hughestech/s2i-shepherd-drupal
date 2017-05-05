@@ -1,3 +1,9 @@
+# Openshift quickstart
+
+This quickstart will help get a local minishift environment up and going. After 
+completing the steps below, it will be possible to deploy the UofA projects quickly
+and easily by following the corresponding OPENSHIFT_QUICKSTART.md in their repos.
+
 ## Prerequisites
 
 * minishift installed - https://github.com/minishift/minishift
