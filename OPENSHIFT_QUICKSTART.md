@@ -2,7 +2,7 @@
 
 * minishift installed - https://github.com/minishift/minishift
 * A key with no password added in gitlab. E.g. jenkins user or your own key.
-* oc command must be available
+* oc command must be available.
 ```
 sudo ln -sf $(find ~/.minishift -name oc -type f | tail -1) /usr/local/bin/oc
 ```
@@ -10,26 +10,24 @@ sudo ln -sf $(find ~/.minishift -name oc -type f | tail -1) /usr/local/bin/oc
 
 ## Configure OpenShift for building.
 
-* Supply your deployment key - something like
+* Supply your deployment key - something like:
 ```
 export KEY_FILE=~/uni/keys/jenkins_deployment_key/id_rsa
 ```
 
-* And export a few other settings
+* And export a few other settings.
 ```
 export KEY_NAME=deployment-key
 export IMAGE=uofa/s2i-drupal
-export PROJECT=development
 ```
 
-* Now for the real action. Start minishift, delete and make a new project, setup docker 
-and build the s2i image.
+* Now for the real action. Start minishift, setup docker and build the s2i 
+image in minishift, then revert to std local docker settings.
 ```
 minishift start
-oc delete project myproject
-oc new-project ${PROJECT}
 eval $(minishift docker-env)
 docker build -t ${IMAGE} .
+eval $(minishift docker-env --unset)
 ```
 
 * Grab the CA from timelord, as the UofA is a bit special.
