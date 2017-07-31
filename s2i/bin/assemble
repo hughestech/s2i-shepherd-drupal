@@ -14,10 +14,10 @@ fi
 
 # Restore artifacts from the previous build (if they exist).
 #
-if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
-  echo "---> Restoring build artifacts..."
-  mv /tmp/artifacts/. ./
-fi
+#if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+#  echo "---> Restoring build artifacts..."
+#  mv /tmp/artifacts/. ./
+#fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
@@ -38,7 +38,12 @@ if [ -f composer.json ]; then
 	fi
 
 	echo "---> Installing composer dependencies..."
-	composer install --no-dev --prefer-dist --no-interaction --no-ansi --optimize-autoloader
+	composer create-project hughestech/social_template:dev-master opensocial --no-interaction
+	#cp opensocial/html/sites/default/default.settings.php opensocial/html/sites/default/settings.php
+	#mkdir -m 755 opensocial/html/sites/default/files
 	# Remove all .git directories to save space.
 	find . -name .git -type d -exec rm -rf {} +
 fi
+
+cp opensocial/html/sites/default/default.settings.php opensocial/html/sites/default/settings.php
+mkdir -m 755 opensocial/html/sites/default/files

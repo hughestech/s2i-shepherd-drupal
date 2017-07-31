@@ -2,7 +2,7 @@
 set -e
 
 # Ensure /code/web directory exists, preventing Apache from crashing.
-mkdir -p /code/web
+mkdir -p /var/www/opensocial/html
 
 # If it's set, ensure $WEB_PATH starts with a slash.
 WEB_PATH=$(echo ${WEB_PATH} | sed 's#^\([^/]\)#/\1#')
@@ -16,8 +16,8 @@ fi
 if [ "${PUBLIC_DIR}" ]; then
   mkdir -p /shared/public
   # Only create symlink if it does not already exist.
-  if [ ! -h /code/${PUBLIC_DIR} ]; then
-    ln -sf /shared/public /code/${PUBLIC_DIR}
+  if [ ! -h /var/www/opensocial/${PUBLIC_DIR} ]; then
+    ln -sf /shared/public /var/www/opensocial/${PUBLIC_DIR}
   fi
   chown -R www-data:www-data /shared/public
 fi

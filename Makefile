@@ -1,4 +1,4 @@
-IMAGE_NAME = shepherd-drupal
+IMAGE_NAME = hughestech
 
 .PHONY: build
 build:
