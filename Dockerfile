@@ -64,7 +64,7 @@ ENV PATH "$PATH:/usr/local/s2i"
 
 # Add startup script
 ADD entrypoint.sh /var/www/entrypoint.sh
-chmod a+x /var/www/entrypoint.sh
+RUN chmod a+x /var/www/entrypoint.sh
 
 # Web port.
 EXPOSE 80
