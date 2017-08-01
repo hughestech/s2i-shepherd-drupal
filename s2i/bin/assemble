@@ -38,12 +38,12 @@ if [ -f composer.json ]; then
 	fi
 
 	echo "---> Installing composer dependencies..."
-	composer create-project hughestech/social_template:dev-master opensocial --no-interaction
+	composer install
 	#cp opensocial/html/sites/default/default.settings.php opensocial/html/sites/default/settings.php
 	#mkdir -m 755 opensocial/html/sites/default/files
 	# Remove all .git directories to save space.
 	find . -name .git -type d -exec rm -rf {} +
 fi
 
-cp opensocial/html/sites/default/default.settings.php opensocial/html/sites/default/settings.php
-mkdir -m 755 opensocial/html/sites/default/files
+#cp opensocial/html/sites/default/default.settings.php opensocial/html/sites/default/settings.php
+#mkdir -m 755 opensocial/html/sites/default/files

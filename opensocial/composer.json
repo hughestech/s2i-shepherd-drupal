@@ -9,7 +9,7 @@
         "composer/installers": "^1.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "cweagans/composer-patches": "^1.0",
-        "hughestech/open_social": "dev-master",
+        "hughestech/open_social": "dev-8.x-1.x",
         "webflo/drush-shim": "dev-master"
     },
     "repositories": [
