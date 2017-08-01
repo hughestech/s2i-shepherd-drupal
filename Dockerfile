@@ -62,6 +62,10 @@ COPY ./s2i/bin /usr/local/s2i
 RUN chmod +x /usr/local/s2i/*
 ENV PATH "$PATH:/usr/local/s2i"
 
+# Add startup script
+ADD entrypoint.sh /var/www/entrypoint.sh
+chmod a+x /var/www/entrypoint.sh
+
 # Web port.
 EXPOSE 80
 
