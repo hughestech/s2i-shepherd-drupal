@@ -85,7 +85,7 @@ RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /shared
 
 # Change the homedir of www-data to be /code.
-RUN usermod -d /code www-data
+#RUN usermod -d /code www-data
 RUN usermod -d /var/www www-data
 
 USER 33
