@@ -72,7 +72,9 @@ RUN chmod a+x /var/www/entrypoint.sh
 EXPOSE 80
 
 # Set working directory.
-WORKDIR /var/www
+#WORKDIR /var/www
+
+USER 100104
 
 # Start the web server.
 CMD ["/apache2-foreground"]
