@@ -11,6 +11,8 @@ LABEL io.k8s.description="Platform for serving Drupal PHP apps in Shepherd" \
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV WEB_PATH /var/www/html
+
 # Configured timezone.
 ENV TZ=Australia/Adelaide
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
