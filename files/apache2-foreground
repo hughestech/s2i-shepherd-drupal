@@ -5,7 +5,8 @@ set -e
 mkdir -p /var/www/html
 
 # If it's set, ensure $WEB_PATH starts with a slash.
-WEB_PATH=$(echo ${WEB_PATH} | sed 's#^\([^/]\)#/\1#')
+#WEB_PATH=$(echo ${WEB_PATH} | sed 's#^\([^/]\)#/\1#')
+WEB_PATH=/var/www/html
 
 # Unset $WEB_PATH if it's just a slash. Otherwise Apache does weird things.
 if [ "$WEB_PATH" == "/" ]; then
