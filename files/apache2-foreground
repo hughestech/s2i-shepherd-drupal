@@ -2,7 +2,7 @@
 set -e
 
 # Ensure /code/web directory exists, preventing Apache from crashing.
-mkdir -p /code/web
+mkdir -p /var/www/html
 
 # If it's set, ensure $WEB_PATH starts with a slash.
 WEB_PATH=$(echo ${WEB_PATH} | sed 's#^\([^/]\)#/\1#')

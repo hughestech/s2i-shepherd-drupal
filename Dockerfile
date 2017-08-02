@@ -52,7 +52,7 @@ RUN a2enmod rewrite \
 && phpenmod -v ALL -s ALL php_custom
 
 # Add /code /shared directories and ensure ownership by User 33 (www-data) and Group 0 (root).
-RUN mkdir -p /code /shared
+RUN mkdir -p /code /shared /var/www
 
 # Add in bootstrap script.
 COPY ./files/apache2-foreground /apache2-foreground
@@ -67,7 +67,7 @@ ENV PATH "$PATH:/usr/local/s2i"
 EXPOSE 8080
 
 # Set working directory.
-WORKDIR /code
+WORKDIR /var/www
 
 # Change all ownership to User 33 (www-data) and Group 0 (root).
 RUN chown -R 33:0   /var/www \
@@ -86,6 +86,7 @@ RUN chmod -R g+rwX  /var/www \
 
 # Change the homedir of www-data to be /code.
 RUN usermod -d /code www-data
+RUN usermod -d /var/www www-data
 
 USER 33
 
