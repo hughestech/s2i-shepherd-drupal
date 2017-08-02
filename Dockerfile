@@ -50,7 +50,7 @@ RUN a2enmod rewrite \
 
 # Add /code /shared directories and ensure ownership by web user.
 RUN mkdir -p /code /shared && chown www-data:www-data /code /shared
-RUN chown www-data:www-data /var/www
+RUN mkdir -p /var/www && chown www-data:www-data /var/www
 #RUN chown -R 104:0 /var/www
 
 # Add in bootstrap script.
@@ -67,7 +67,7 @@ ADD entrypoint.sh /var/www/entrypoint.sh
 RUN chmod a+x /var/www/entrypoint.sh
 
 # Web port.
-EXPOSE 8080
+EXPOSE 80
 
 # Set working directory.
 WORKDIR /var/www
