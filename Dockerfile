@@ -67,7 +67,7 @@ ADD entrypoint.sh /var/www/entrypoint.sh
 RUN chmod a+x /var/www/entrypoint.sh
 
 # Web port.
-EXPOSE 80
+EXPOSE 8080
 
 # Set working directory.
 WORKDIR /var/www
