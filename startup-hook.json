@@ -1,0 +1,24 @@
+kind: DeploymentConfig
+apiVersion: v1
+metadata:
+  name: startup-hook
+spec:
+  template:
+    metadata:
+      labels:
+        name: startup-hook
+    spec:
+      containers:
+        - name: startup-hook
+          image: test/opensocial-app
+  replicas: 5
+  selector:
+    name: startup-hook
+  strategy:
+    type: Rolling
+    rollingParams:
+      pre:
+        failurePolicy: Abort
+        execNewPod:
+          containerName: startup-hook 
+          command: [ "./entrypoint.sh"]  
