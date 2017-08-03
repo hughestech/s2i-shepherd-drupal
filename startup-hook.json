@@ -1,23 +1,28 @@
 kind: DeploymentConfig
 apiVersion: v1
 metadata:
-  name: startup-hook
+  name: startup
 spec:
   template:
     metadata:
       labels:
-        name: startup-hook
+        name: startup
     spec:
       containers:
         - name: startup-hook
-          image: test/opensocial-app
-  replicas: 5
+          image: 172.30.175.57:5000/test/opensocial-app:v1.0-db
+  replicas: 1
   selector:
-    name: startup-hook
+    name: startup
   strategy:
     type: Rolling
     rollingParams:
       pre:
+        failurePolicy: Abort
+        execNewPod:
+          containerName: startup-hook 
+          command: [ "/var/www/entrypoint.sh"]  
+      post:
         failurePolicy: Abort
         execNewPod:
           containerName: startup-hook 
