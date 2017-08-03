@@ -79,7 +79,8 @@ RUN chown -R 33:0   /var/www \
 &&  chown -R 33:0   /var/log/apache2 \
 &&  chown -R 33:0   /code \
 &&  chown -R 33:0   /shared \
-&&  chown -R 33:0   /tmp
+&&  chown -R 33:0   /tmp \
+&&  chown -R 33:0   /var
 
 RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /run/lock \
@@ -87,7 +88,8 @@ RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /var/log/apache2 \
 &&  chmod -R g+rwX  /code \
 &&  chmod -R g+rwX  /shared \
-&&  chmod -R g+rwX  /tmp
+&&  chmod -R g+rwX  /tmp \
+&&  chmod -R g+rwX  /var
 
 
 # Change the homedir of www-data to be /code.
