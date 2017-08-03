@@ -29,6 +29,9 @@ RUN apt-get update \
 && apt-get -y remove --purge software-properties-common python-software-properties \
 && apt-get -y autoremove && apt-get -y autoclean && apt-get clean && rm -rf /var/lib/apt/lists /tmp/* /var/tmp/*
 
+# Adding user node
+RUN adduser node root
+
 # Install Drupal tools: Robo, Drush, Drupal console and Composer.
 RUN wget -O /usr/local/bin/robo https://github.com/consolidation/Robo/releases/download/1.0.4/robo.phar && chmod +x /usr/local/bin/robo \
 && wget -O /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && chmod a+x /usr/local/bin/drush \
@@ -73,14 +76,14 @@ EXPOSE 8080
 WORKDIR /var/www
 
 # Change all ownership to User 33 (www-data) and Group 0 (root).
-RUN chown -R 104:0   /var/www \
-&&  chown -R 104:0   /run/lock \
-&&  chown -R 104:0   /var/run/apache2 \
-&&  chown -R 104:0   /var/log/apache2 \
-&&  chown -R 104:0   /code \
-&&  chown -R 104:0   /shared \
-&&  chown -R 104:0   /tmp \
-&&  chown -R 104:0   /var
+RUN chown -R node:root   /var/www \
+&&  chown -R node:root   /run/lock \
+&&  chown -R node:root   /var/run/apache2 \
+&&  chown -R node:root   /var/log/apache2 \
+&&  chown -R node:root   /code \
+&&  chown -R node:root   /shared \
+&&  chown -R node:root   /tmp \
+&&  chown -R node:root   /var
 
 RUN chmod -R g+rw  /var/www \
 &&  chmod -R g+rw  /run/lock \
@@ -94,9 +97,9 @@ RUN chmod -R g+rw  /var/www \
 
 # Change the homedir of www-data to be /code.
 #RUN usermod -d /code www-data
-RUN usermod -d /var/www www-data
+#RUN usermod -d /var/www www-data
 
-USER 100104
+USER 1000
 
 # Start the web server.
 CMD ["/apache2-foreground"]
