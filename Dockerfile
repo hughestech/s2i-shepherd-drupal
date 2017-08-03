@@ -32,7 +32,7 @@ RUN apt-get update \
 # Install Drupal tools: Robo, Drush, Drupal console and Composer.
 RUN wget -O /usr/local/bin/robo https://github.com/consolidation/Robo/releases/download/1.0.4/robo.phar && chmod +x /usr/local/bin/robo \
 && wget -O /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && chmod a+x /usr/local/bin/drush \
-&& wget -O /usr/local/bin/drupal https://drupalconsole.com/installer && chmod +x /usr/local/bin/drupal \
+&& wget -O /usr/local/bin/drupal https://drupalconsole.com/installer && chmod a+x /usr/local/bin/drupal \
 && wget -q https://getcomposer.org/installer -O - | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Make bash the default shell.
