@@ -1,4 +1,5 @@
 #!/bin/bash
+DRUPAL_DIR=/var/www/html
 
 echo "Installation starting..."
 
