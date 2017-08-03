@@ -42,4 +42,4 @@ if [ -f composer.json ]; then
   find . -name .git -type d -exec rm -rf {} +
 fi
 
-RUN cp /var/www/html/sites/default/default.settings.php $/var/www/html/sites/default/settings.php
+cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
