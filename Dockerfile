@@ -31,7 +31,7 @@ RUN apt-get update \
 
 # Install Drupal tools: Robo, Drush, Drupal console and Composer.
 RUN wget -O /usr/local/bin/robo https://github.com/consolidation/Robo/releases/download/1.0.4/robo.phar && chmod +x /usr/local/bin/robo \
-&& wget -O /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && chmod +x /usr/local/bin/drush \
+&& wget -O /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && chmod a+x /usr/local/bin/drush \
 && wget -O /usr/local/bin/drupal https://drupalconsole.com/installer && chmod +x /usr/local/bin/drupal \
 && wget -q https://getcomposer.org/installer -O - | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -73,14 +73,14 @@ EXPOSE 8080
 WORKDIR /var/www
 
 # Change all ownership to User 33 (www-data) and Group 0 (root).
-RUN chown -R 33:0   /var/www \
-&&  chown -R 33:0   /run/lock \
-&&  chown -R 33:0   /var/run/apache2 \
-&&  chown -R 33:0   /var/log/apache2 \
-&&  chown -R 33:0   /code \
-&&  chown -R 33:0   /shared \
-&&  chown -R 33:0   /tmp \
-&&  chown -R 33:0   /var
+RUN chown -R 104:0   /var/www \
+&&  chown -R 104:0   /run/lock \
+&&  chown -R 104:0   /var/run/apache2 \
+&&  chown -R 104:0   /var/log/apache2 \
+&&  chown -R 104:0   /code \
+&&  chown -R 104:0   /shared \
+&&  chown -R 104:0   /tmp \
+&&  chown -R 104:0   /var
 
 RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /run/lock \
@@ -96,7 +96,7 @@ RUN chmod -R g+rwX  /var/www \
 #RUN usermod -d /code www-data
 RUN usermod -d /var/www www-data
 
-USER 33
+USER 100104
 
 # Start the web server.
 CMD ["/apache2-foreground"]
