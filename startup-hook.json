@@ -21,4 +21,4 @@ spec:
         failurePolicy: Abort
         execNewPod:
           containerName: startup-hook 
-          command: [ "./entrypoint.sh"]  
+          command: [ "/var/www/entrypoint.sh"]  
