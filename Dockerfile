@@ -78,7 +78,7 @@ RUN chown -R 33:0   /var/www \
 &&  chown -R 33:0   /var/run/apache2 \
 &&  chown -R 33:0   /var/log/apache2 \
 &&  chown -R 33:0   /code \
-&&  chown -R 33:0   /shared
+&&  chown -R 33:0   /shared \
 &&  chown -R 33:0   /tmp
 
 RUN chmod -R g+rwX  /var/www \
@@ -86,7 +86,7 @@ RUN chmod -R g+rwX  /var/www \
 &&  chmod -R g+rwX  /var/run/apache2 \
 &&  chmod -R g+rwX  /var/log/apache2 \
 &&  chmod -R g+rwX  /code \
-&&  chmod -R g+rwX  /shared
+&&  chmod -R g+rwX  /shared \
 &&  chmod -R g+rwX  /tmp
 
 
