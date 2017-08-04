@@ -58,13 +58,6 @@ RUN a2enmod rewrite \
 # Add /var/www /shared directories and ensure ownership by User 33 (www-data) and Group 0 (root).
 RUN mkdir -p /var/www /shared 
 
-# Install drush
-ADD drush/drush_install.sh /var/www/drush_install.sh
-RUN chmod a+x /var/www/drush_install.sh && bash /var/www/drush_install.sh
-
-# Verify that Drush/shim works
-RUN drush status 
-
 # Add s2i scripts.
 COPY ./s2i/bin /usr/local/s2i
 RUN chmod +x /usr/local/s2i/*
@@ -76,18 +69,25 @@ EXPOSE 8080
 # Set working directory.
 WORKDIR /var/www
 
-# Change all ownership to User 33 (www-data) and Group 0 (root).
-RUN chown -R 33:0   /var/www \
-&&  chown -R 33:0   /run/lock \
-&&  chown -R 33:0   /var/run/apache2 \
-&&  chown -R 33:0   /var/log/apache2 \
-&&  chown -R 33:0   /shared
+# Change all ownership to User 104 (_apt) and Group 0 (root).
+RUN chown -R 104:0   /var/www \
+&&  chown -R 104:0   /run/lock \
+&&  chown -R 104:0   /var/run/apache2 \
+&&  chown -R 104:0   /var/log/apache2 \
+&&  chown -R 104:0   /shared
 
-RUN chmod -R g+rwX  /var/www \
-&&  chmod -R g+rwX  /run/lock \
-&&  chmod -R g+rwX  /var/run/apache2 \
-&&  chmod -R g+rwX  /var/log/apache2 \
-&&  chmod -R g+rwX  /shared
+RUN chmod -R g+rw  /var/www \
+&&  chmod -R g+rw  /run/lock \
+&&  chmod -R g+rw  /var/run/apache2 \
+&&  chmod -R g+rw  /var/log/apache2 \
+&&  chmod -R g+rw  /shared
+
+# Install drush
+ADD drush/drush_install.sh /var/www/drush_install.sh
+RUN chmod a+x /var/www/drush_install.sh && bash /var/www/drush_install.sh
+
+# Verify that Drush/shim works
+RUN drush status 
 
 # Change the homedir of www-data to be /var/www.
 RUN usermod -d /var/www www-data
