@@ -29,13 +29,10 @@ RUN apt-get update \
 && apt-get -y remove --purge software-properties-common python-software-properties \
 && apt-get -y autoremove && apt-get -y autoclean && apt-get clean && rm -rf /var/lib/apt/lists /tmp/* /var/tmp/*
 
-# Adding user node
-RUN adduser node root
-
 # Install Drupal tools: Robo, Drush, Drupal console and Composer.
 RUN wget -O /usr/local/bin/robo https://github.com/consolidation/Robo/releases/download/1.0.4/robo.phar && chmod +x /usr/local/bin/robo \
-&& wget -O /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && chmod a+x /usr/local/bin/drush \
-&& wget -O /usr/local/bin/drupal https://drupalconsole.com/installer && chmod a+x /usr/local/bin/drupal \
+#&& wget -O /usr/local/bin/drush https://s3.amazonaws.com/files.drush.org/drush.phar && chmod +x /usr/local/bin/drush \
+&& wget -O /usr/local/bin/drupal https://drupalconsole.com/installer && chmod +x /usr/local/bin/drupal \
 && wget -q https://getcomposer.org/installer -O - | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Make bash the default shell.
@@ -43,9 +40,6 @@ RUN ln -sf /bin/bash /bin/sh
 
 # Apache config.
 COPY ./files/apache2.conf /etc/apache2/apache2.conf
-
-# Startup config
-COPY ./entrypoint.sh /var/www/entrypoint.sh
 
 # PHP config.
 COPY ./files/php_custom.ini /etc/php/7.1/mods-available/php_custom.ini
@@ -57,12 +51,15 @@ RUN a2enmod rewrite \
 && a2dissite 000-default \
 && phpenmod -v ALL -s ALL php_custom
 
-# Add /code /shared directories and ensure ownership by User 33 (www-data) and Group 0 (root).
-RUN mkdir -p /code /shared /var/www
+# Add /var/www /shared directories and ensure ownership by User 33 (www-data) and Group 0 (root).
+RUN mkdir -p /var/www /shared 
 
-# Add in bootstrap script.
-COPY ./files/apache2-foreground /apache2-foreground
-RUN chmod +x /apache2-foreground
+# Install drush
+ADD drush/drush_install.sh /var/www/drush_install.sh
+RUN chmod a+x /var/www/drush_install.sh && bash /var/www/drush_install.sh
+
+# Verify that Drush/shim works
+RUN drush status 
 
 # Add s2i scripts.
 COPY ./s2i/bin /usr/local/s2i
@@ -76,30 +73,22 @@ EXPOSE 8080
 WORKDIR /var/www
 
 # Change all ownership to User 33 (www-data) and Group 0 (root).
-RUN chown -R node:root   /var/www \
-&&  chown -R node:root   /run/lock \
-&&  chown -R node:root   /var/run/apache2 \
-&&  chown -R node:root   /var/log/apache2 \
-&&  chown -R node:root   /code \
-&&  chown -R node:root   /shared \
-&&  chown -R node:root   /tmp \
-&&  chown -R node:root   /var
+RUN chown -R 33:0   /var/www \
+&&  chown -R 33:0   /run/lock \
+&&  chown -R 33:0   /var/run/apache2 \
+&&  chown -R 33:0   /var/log/apache2 \
+&&  chown -R 33:0   /shared
 
-RUN chmod -R g+rw  /var/www \
-&&  chmod -R g+rw  /run/lock \
-&&  chmod -R g+rw  /var/run/apache2 \
-&&  chmod -R g+rw  /var/log/apache2 \
-&&  chmod -R g+rw  /code \
-&&  chmod -R g+rw  /shared \
-&&  chmod -R g+rw  /tmp \
-&&  chmod -R g+rw  /var
+RUN chmod -R g+rwX  /var/www \
+&&  chmod -R g+rwX  /run/lock \
+&&  chmod -R g+rwX  /var/run/apache2 \
+&&  chmod -R g+rwX  /var/log/apache2 \
+&&  chmod -R g+rwX  /shared
 
+# Change the homedir of www-data to be /var/www.
+RUN usermod -d /var/www www-data
 
-# Change the homedir of www-data to be /code.
-#RUN usermod -d /code www-data
-#RUN usermod -d /var/www www-data
-
-USER 1000
+USER 33:0
 
 # Start the web server.
-CMD ["/apache2-foreground"]
+CMD ["/usr/local/s2i/run"]

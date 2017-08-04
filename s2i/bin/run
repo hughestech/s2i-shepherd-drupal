@@ -7,5 +7,32 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+# Make umask more permissive.
+echo "---> Setting umask to 0002."
 umask 0002
-exec /apache2-foreground
+
+# Ensure /var/www/html directory exists, preventing Apache from crashing.
+echo "---> Ensuring /var/www/html directory exists."
+mkdir -p /var/www/html
+
+# If it's set, ensure $WEB_PATH starts with a slash.
+WEB_PATH=$(echo ${WEB_PATH} | sed 's#^\([^/]\)#/\1#')
+echo "---> \$WEB_PATH is set to: ${WEB_PATH}"
+
+# Unset $WEB_PATH if it's just a slash. Otherwise Apache does weird things.
+if [ "${WEB_PATH}" == "/" ]; then
+  echo "---> Unsetting \$WEB_PATH to avoid an apache alias being created."
+  unset WEB_PATH
+fi
+
+#echo "---> Symlinking public and private directories to /shared."
+#mkdir -p /shared/public /shared/private
+#if [ ! -h /code/web/sites/default/files ]; then
+#  ln -s /shared/public /code/web/sites/default/files
+#fi
+#if [ ! -h /code/private ]; then
+#  ln -s /shared/private /code/private
+#fi
+
+echo "---> Starting apache2..."
+exec apache2 -D FOREGROUND
