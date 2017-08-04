@@ -1,8 +1,6 @@
 #!/bin/bash
 DRUPAL_DIR=/var/www/html
 
-echo "Installation starting..."
-
 echo "CD to Drupal directory"
 cd $DRUPAL_DIR
 	echo "Checking current directory..."
