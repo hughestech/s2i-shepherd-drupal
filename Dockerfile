@@ -43,6 +43,7 @@ COPY ./files/apache2.conf /etc/apache2/apache2.conf
 
 # Apache entrypoint.
 COPY .entrypoint.sh /var/www/entrypoint.sh
+RUN chmod a+x /var/www/entrypoint.sh
 
 # PHP config.
 COPY ./files/php_custom.ini /etc/php/7.1/mods-available/php_custom.ini
