@@ -90,9 +90,10 @@ RUN chmod a+x /var/www/drush_install.sh && bash /var/www/drush_install.sh
 RUN drush status 
 
 # Change the homedir of www-data to be /var/www.
-RUN usermod -d /var/www www-data
+# RUN usermod -d /var/www www-data
 
-USER 33:0
+#USER 33:0
+USER 100104
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]

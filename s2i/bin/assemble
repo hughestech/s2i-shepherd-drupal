@@ -46,3 +46,5 @@ if [ -f composer.json ]; then
   # Remove all .git directories to save space.
   find . -name .git -type d -exec rm -rf {} +
 fi
+
+
