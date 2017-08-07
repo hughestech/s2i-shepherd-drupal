@@ -295,7 +295,8 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+#$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'Uyo8IbKR_XMtOq_uQ_wddI8m5pH6F-KiLJs9EpcY_pzB5P-SnWZ_OtTYMgNFrY4YCy-nbucMNg';
 
 /**
  * Deployment identifier.
