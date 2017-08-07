@@ -765,11 +765,11 @@ $settings['file_scan_ignore_directories'] = [
 # }
 
 $databases['default']['default'] = array (
-  'database' => ${MYSQL_DATABASE},
-  'username' => ${MYSQL_USER},
-  'password' => ${MYSQL_PASSWORD},
+  'database' => getenv('MYSQL_DATABASE'),
+  'username' => getenv('MYSQL_USER'),
+  'password' => getenv('MYSQL_PASSWORD'),
   'prefix' => '',
-  'host' => ${DRUPAL_SERVICE_NAME},
+  'host' => getenv('DRUPAL_SERVICE_NAME'),
   'port' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',                                                        
