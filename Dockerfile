@@ -46,7 +46,7 @@ COPY ./files/apache2.conf /etc/apache2/apache2.conf
 # RUN chmod a+x /var/www/entrypoint.sh
 
 # Settings accepts dynamic variables.
-COPY .config/settings.php /var/www/sites/default/settings.php
+COPY .config/settings.php /var/www/settings.php
 # RUN chmod a+x /var/www/entrypoint.sh
 
 # PHP config.
