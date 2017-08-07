@@ -62,6 +62,8 @@ RUN a2enmod rewrite \
 # Add /var/www /shared directories and ensure ownership by User 33 (www-data) and Group 0 (root).
 RUN mkdir -p /var/www /shared 
 
+RUN mkdir /var/www/files
+
 # Add s2i scripts.
 COPY ./s2i/bin /usr/local/s2i
 RUN chmod +x /usr/local/s2i/*
@@ -78,13 +80,15 @@ RUN chown -R 104:0   /var/www \
 &&  chown -R 104:0   /run/lock \
 &&  chown -R 104:0   /var/run/apache2 \
 &&  chown -R 104:0   /var/log/apache2 \
-&&  chown -R 104:0   /shared
+&&  chown -R 104:0   /shared \
+&&  chown -R 104:0   /var/www/files
 
 RUN chmod -R g+rw  /var/www \
 &&  chmod -R g+rw  /run/lock \
 &&  chmod -R g+rw  /var/run/apache2 \
 &&  chmod -R g+rw  /var/log/apache2 \
-&&  chmod -R g+rw  /shared
+&&  chmod -R g+rw  /shared \
+&&  chmod -R g+rw  /var/www/files
 
 # Install drush
 ADD drush/drush_install.sh /var/www/drush_install.sh
