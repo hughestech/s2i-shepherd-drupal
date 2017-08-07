@@ -48,4 +48,4 @@ if [ -f composer.json ]; then
 fi
 
 echo "Copying settings file to drupal"
-cp /var/www/config/settings.php /var/www/html/sites/default
+cp /var/www/settings.php /var/www/html/sites/default
