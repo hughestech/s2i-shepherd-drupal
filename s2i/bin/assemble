@@ -50,3 +50,7 @@ fi
 echo "Copying settings file to drupal"
 cp /var/www/settings.php /var/www/html/sites/default
 mv /var/www/files /var/www/html/sites/default/
+mv /var/www/bootstrap /var/www/html/sites/default/files/
+mv /var/www/css /var/www/html/sites/default/files/
+mv /var/www/js /var/www/html/sites/default/files/
+
