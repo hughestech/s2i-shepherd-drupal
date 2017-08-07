@@ -35,7 +35,4 @@ fi
 #fi
 
 echo "---> Starting apache2..."
-exec apache2 FOREGROUND
-
-echo "---> Starting Drupal Installation..."
-exec entrypoint FOREGROUND
+exec apache2 -D FOREGROUND
