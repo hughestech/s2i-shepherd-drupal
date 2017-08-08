@@ -20,6 +20,13 @@ RUN locale-gen en_AU.UTF-8
 ENV LANG       en_AU.UTF-8
 ENV LC_ALL     en_AU.UTF-8
 
+ENV MYSQL_USER test1
+ENV MYSQL_PASSWORD test1
+ENV MYSQL_DATABASE test1
+ENV MYSQL_ROOT_PASSWORD test1
+ENV DB_HOST test1
+
+
 # Upgrade all currently installed packages and install web server packages.
 RUN apt-get update \
 && apt-get -y install software-properties-common python-software-properties \
@@ -46,7 +53,7 @@ COPY ./files/apache2.conf /etc/apache2/apache2.conf
 # RUN chmod a+x /var/www/entrypoint.sh
 
 # Settings accepts dynamic variables.
-COPY ./config/settings.php /var/www/settings.php
+# COPY ./config/settings.php /var/www/settings.php
 # RUN chmod a+x /var/www/entrypoint.sh
 
 # PHP config.
@@ -61,12 +68,6 @@ RUN a2enmod rewrite \
 
 # Add /var/www /shared directories and ensure ownership by User 33 (www-data) and Group 0 (root).
 RUN mkdir -p /var/www /shared 
-
-# Add generated folders
-RUN mkdir /var/www/files
-RUN mkdir /var/www/bootstrap
-RUN mkdir /var/www/css
-RUN mkdir /var/www/js
 
 # Add s2i scripts.
 COPY ./s2i/bin /usr/local/s2i
@@ -84,22 +85,14 @@ RUN chown -R 104:0   /var/www \
 &&  chown -R 104:0   /run/lock \
 &&  chown -R 104:0   /var/run/apache2 \
 &&  chown -R 104:0   /var/log/apache2 \
-&&  chown -R 104:0   /shared \
-&&  chown -R 104:0   /var/www/files \
-&&  chown -R 104:0   /var/www/bootstrap \
-&&  chown -R 104:0   /var/www/css \
-&&  chown -R 104:0   /var/www/js
+&&  chown -R 104:0   /shared
 
 
 RUN chmod -R g+rw  /var/www \
 &&  chmod -R g+rw  /run/lock \
 &&  chmod -R g+rw  /var/run/apache2 \
 &&  chmod -R g+rw  /var/log/apache2 \
-&&  chmod -R g+rw  /shared \
-&&  chmod -R g+rw  /var/www/files \
-&&  chmod -R g+rw  /var/www/bootstrap \
-&&  chmod -R g+rw  /var/www/css \
-&&  chmod -R g+rw  /var/www/js
+&&  chmod -R g+rw  /shared
 
 
 # Install drush

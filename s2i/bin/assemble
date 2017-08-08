@@ -7,6 +7,7 @@
 #  https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+
 # If the 'shepherd-drupal' assemble script is executed with the '-h' flag, print the usage.
 if [[ "$1" == "-h" ]]; then
   exec /usr/libexec/s2i/usage
@@ -42,15 +43,27 @@ if [ -f composer.json ]; then
       chmod g+rw /var/www/html/sites/default
   fi
 
+  echo "CD to drupal directory..."
+  echo
+  cd /var/www/html
+  echo "Checking path..."
+  echo
+  pwd
+  echo
+  echo "Running drush install..."
+  echo
+  drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DB_HOST}/${MYSQL_DATABASE}
+  echo "OpenSocial site is successfully installed."
+  echo
   echo "---> Cleaning up..."
   # Remove all .git directories to save space.
   find . -name .git -type d -exec rm -rf {} +
 fi
 
-echo "Copying settings file to drupal"
-cp /var/www/settings.php /var/www/html/sites/default
-mv /var/www/files /var/www/html/sites/default/
-mv /var/www/bootstrap /var/www/html/sites/default/files/
-mv /var/www/css /var/www/html/sites/default/files/
-mv /var/www/js /var/www/html/sites/default/files/
+#echo "Copying settings file to drupal"
+#cp /var/www/settings.php /var/www/html/sites/default
+#mv /var/www/files /var/www/html/sites/default/
+#mv /var/www/bootstrap /var/www/html/sites/default/files/
+#mv /var/www/css /var/www/html/sites/default/files/
+#mv /var/www/js /var/www/html/sites/default/files/
 
