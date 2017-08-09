@@ -82,7 +82,7 @@
             "containers": [
               {
                 "name": "drupal-web",
-                "image": "172.30.175.57:5000/test/hughestech/opensocial",
+                "image": "hughestech/opensocial",
                 "ports": [
                   {
                     "containerPort": 8080,
