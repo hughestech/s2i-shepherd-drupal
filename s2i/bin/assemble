@@ -60,8 +60,8 @@ if [ -f composer.json ]; then
   find . -name .git -type d -exec rm -rf {} +
 fi
 
-#echo "Copying settings file to drupal"
-#cp /var/www/settings.php /var/www/html/sites/default
+echo "Copying settings file to drupal"
+cp /var/www/settings.php /var/www/html/sites/default
 #mv /var/www/files /var/www/html/sites/default/
 #mv /var/www/bootstrap /var/www/html/sites/default/files/
 #mv /var/www/css /var/www/html/sites/default/files/

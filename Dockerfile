@@ -53,8 +53,8 @@ COPY ./files/apache2.conf /etc/apache2/apache2.conf
 # RUN chmod a+x /var/www/entrypoint.sh
 
 # Settings accepts dynamic variables.
-# COPY ./config/settings.php /var/www/settings.php
-# RUN chmod a+x /var/www/entrypoint.sh
+COPY ./config/settings.php /var/www/settings.php
+RUN chmod a+x /var/www/settings.php
 
 # PHP config.
 COPY ./files/php_custom.ini /etc/php/7.1/mods-available/php_custom.ini
