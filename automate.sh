@@ -25,8 +25,14 @@ sudo docker build -t drupals2ibuilder . #-e MYSQL_USER=$MYSQL_USER -e MYSQL_PASS
 sudo s2i build opensocial drupals2ibuilder $appName -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e DB_HOST=$DB_HOST
 
 #clean up
+#remove mysql container
+sudo docker rm -f mysql_database
+
 #remove docker network. See https://docs.docker.com/engine/reference/commandline/network_rm/
-#sudo docker network rm $DB_HOST
+sudo docker network rm $DB_HOST
+
+
+
 
 #Listing docker network, container and images
 sudo docker network ls
