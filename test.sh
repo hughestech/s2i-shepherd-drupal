@@ -10,25 +10,30 @@ DB_HOST=172.22.0.1
 appName=hughestech/opensocial
 
 #Mysql hostname. See https://docs.docker.com/engine/reference/commandline/network_create/
+echo "Creating a network..."
 sudo docker network create --subnet=172.22.0.0/16 $DB_HOST 
+echo
 
 # TODO - add environment variables, using db variables
 # https://hub.docker.com/r/centos/mysql-56-centos7/
 # NOTE: we do not want the data to be saved across builds, so we are not mapping volumes. This means, the data will be lost when we restart the container. This is the expected result. We only need to mysql so we can run ‘drush install’. 
+echo "Creating mysql container..."
 sudo docker run -d --name mysql_database -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --network=$DB_HOST -p 3306:3306 centos/mysql-56-centos7
-
-# Creating builder image. Not sure if we need to pass env vars here. As long as they are added to dockerfile.
-sudo docker build -t drupals2ibuilder . #-e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-
-# Creating the application image
-# Run builder, pass env vars to builder image
-sudo s2i build opensocial drupals2ibuilder $appName -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e DB_HOST=$DB_HOST
-
-#clean up
-#remove docker network. See https://docs.docker.com/engine/reference/commandline/network_rm/
-#sudo docker network rm $DB_HOST
+echo
 
 #Listing docker network, container and images
+echo "Listing docker network, images and containers..."
 sudo docker network ls
 sudo docker images
 sudo docker ps
+echo
+
+echo "Accessing docker container..."
+sudo docker exec -it mysql_database sh
+echo
+
+#echo "Testing if database is working..."
+#mysql -h $DB_HOST -u user123 -ppass12345678 -e "show databases"
+#echo
+
+#mysql -h 172.22.0.1 -u user123 -ppass12345678 -e "show databases"
