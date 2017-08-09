@@ -31,9 +31,6 @@ sudo docker rm -f mysql_database
 #remove docker network. See https://docs.docker.com/engine/reference/commandline/network_rm/
 sudo docker network rm $DB_HOST
 
-
-
-
 #Listing docker network, container and images
 sudo docker network ls
 sudo docker images
