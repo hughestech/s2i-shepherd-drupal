@@ -770,8 +770,10 @@ $databases['default']['default'] = array (
   'username' => getenv('MYSQL_USER'),
   'password' => getenv('MYSQL_PASSWORD'),
   'prefix' => '',
-  'host' => getenv('DRUPAL_SERVICE_NAME'),
+  'host' => getenv('DB_HOST'),
   'port' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',                                                        
 );
+#$settings['install_profile'] = 'social';
+#$config_directories['sync'] = 'sites/default/files/config_xD8b2s6zQg7Jusv7NxSK36r3wj8aKW0ZULyO61wvIPASb_hXS6e5O5dwsS39aASUyu2uWz3vDg/sync';
