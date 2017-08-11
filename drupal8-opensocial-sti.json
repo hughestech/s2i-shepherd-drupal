@@ -158,23 +158,6 @@
           }
         }
       }
-    },
-    {
-      "kind": "PersistentVolumeClaim",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${DRUPAL_SERVICE_NAME}"
-      },
-      "spec": {
-        "accessModes": [
-          "ReadWriteMany"
-        ],
-        "resources": {
-          "requests": {
-            "storage": "${VOLUME_CAPACITY}"
-          }
-        }
-      }
     }
   ],
   "parameters": [
