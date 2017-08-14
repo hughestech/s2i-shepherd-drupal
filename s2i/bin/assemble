@@ -47,12 +47,9 @@ if [ -f composer.json ]; then
   echo
   cd /var/www/html
   echo "Checking path..."
-  echo
   pwd
-  echo
   echo "Running drush install..."
-  echo
-  drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DB_HOST}/${MYSQL_DATABASE}
+  echodrush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DB_HOST}/${MYSQL_DATABASE}
   echo "OpenSocial site is successfully installed."
   drush cr
   echo "Copying settings file to drupal"
