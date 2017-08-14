@@ -80,13 +80,13 @@ EXPOSE 8080
 # Set working directory.
 WORKDIR /var/www
 
-# Change all ownership to User 104 (_apt) and Group 0 (root).
-RUN chown -R 104:0   /var/www \
-&&  chown -R 104:0   /run/lock \
-&&  chown -R 104:0   /var/run/apache2 \
-&&  chown -R 104:0   /var/log/apache2 \
-&&  chown -R 104:0   /shared \
-&&  chown -R 104:0   /tmp
+# Change all ownership to User 33 (www-data) and Group 0 (root).
+RUN chown -R 33:0   /var/www \
+&&  chown -R 33:0   /run/lock \
+&&  chown -R 33:0   /var/run/apache2 \
+&&  chown -R 33:0   /var/log/apache2 \
+&&  chown -R 33:0   /shared \
+&&  chown -R 33:0   /tmp
 
 RUN chmod -R g+rw  /var/www \
 &&  chmod -R g+rw  /run/lock \
@@ -103,10 +103,10 @@ RUN chmod a+x /var/www/drush_install.sh && bash /var/www/drush_install.sh
 RUN drush status 
 
 # Change the homedir of www-data to be /var/www.
-# RUN usermod -d /var/www www-data
+RUN usermod -d /var/www www-data
 
-#USER 33:0
-USER 100104
+USER 33:0
+#USER 100104
 
 # Start the web server.
 CMD ["/usr/local/s2i/run"]
