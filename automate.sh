@@ -22,7 +22,7 @@ docker build -t drupals2ibuilder:v1.0 . #-e MYSQL_USER=$MYSQL_USER -e MYSQL_PASS
 
 # Creating the application image
 # Run builder, pass env vars to builder image
-s2i build opensocial drupals2ibuilder:v1.0 $appName -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e DBHOST=$DBHOST
+s2i build opensocial drupals2ibuilder $appName -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e DBHOST=$DBHOST
 
 #clean up
 #remove mysql container
