@@ -7,7 +7,7 @@ MYSQL_ROOT_PASSWORD=root12345678
 DBHOST=172.22.0.1
 
 #Application Container
-appName=hughestech/opensocial
+appName=hughestech/opensocial:v1.0
 
 #Mysql hostname. See https://docs.docker.com/engine/reference/commandline/network_create/
 docker network create --subnet=172.22.0.0/16 $DBHOST 
