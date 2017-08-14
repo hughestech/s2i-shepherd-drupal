@@ -111,6 +111,10 @@
                     "value": "${DB_HOST}"
                   },
                   {
+                    "name": "HASH_SALT",
+                    "value": "${HASH_SALT}"
+                  },
+                  {
         "name": "DRUPAL_MODULES",
         "value": "${DRUPAL_MODULES}"
       },
@@ -176,6 +180,13 @@
       "name": "VOLUME_CAPACITY",
       "description": "Volume space available for data, e.g. 512Mi, 2Gi",
       "value": "10Gi",
+      "required": true
+    },
+    {
+      "name": "HASH_SALT",
+      "description": "Hash salt for settings file.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{74}",
       "required": true
     },
     {
