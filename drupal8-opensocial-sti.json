@@ -107,8 +107,8 @@
                     "value": "${DRUPAL_SERVICE_NAME}"
                   },
                   {
-                    "name": "DB_HOST",
-                    "value": "${DB_HOST}"
+                    "name": "DBHOST",
+                    "value": "${DBHOST}"
                   },
                   {
                     "name": "HASH_SALT",
@@ -171,7 +171,7 @@
       "value": "drupal8"
     },
     {
-      "name": "DB_HOST",
+      "name": "DBHOST",
       "description": "Drupal hostname.",
       "value": "IPAddress",
       "required": true

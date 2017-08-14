@@ -1,13 +1,13 @@
 #!/bin/bash
 # variables for mysql database
-DB_HOST=172.22.0.1
+DBHOST=172.22.0.1
 
 echo "Deleting mysql container..."
 sudo docker rm -f mysql_database
 echo
 
 echo "Deleting network..."
-sudo docker network rm $DB_HOST
+sudo docker network rm $DBHOST
 echo
 
 #Listing docker network, container and images

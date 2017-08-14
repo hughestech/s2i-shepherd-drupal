@@ -24,7 +24,7 @@ ENV MYSQL_USER test1
 ENV MYSQL_PASSWORD test1
 ENV MYSQL_DATABASE test1
 ENV MYSQL_ROOT_PASSWORD test1
-ENV DB_HOST test1
+ENV DBHOST test1
 
 
 # Upgrade all currently installed packages and install web server packages.
