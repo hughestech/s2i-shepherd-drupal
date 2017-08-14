@@ -18,7 +18,7 @@ docker network create --subnet=172.22.0.0/16 $DBHOST
 docker run -d --name mysql_database -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --network=$DBHOST -p 3306:3306 centos/mysql-56-centos7
 
 # Creating builder image. Not sure if we need to pass env vars here. As long as they are added to dockerfile.
-docker build -t drupals2ibuilder:v1.0 . #-e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+docker build -t drupals2ibuilder . #-e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
 
 # Creating the application image
 # Run builder, pass env vars to builder image
