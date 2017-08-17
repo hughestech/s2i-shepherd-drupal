@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: startup-hook
-          image: 172.30.175.57:5000/test/opensocial-app:v1.0-db
+          image: hughestech/opensocial:v1.2
   replicas: 1
   selector:
     name: startup
