@@ -93,7 +93,7 @@
             "containers": [
               {
                 "name": "drupal-web",
-                "image": "hughestech/opensocial:v1.2",
+                "image": "hughestech/opensocial:v1.3",
                 "ports": [
                   {
                     "containerPort": 8080,
