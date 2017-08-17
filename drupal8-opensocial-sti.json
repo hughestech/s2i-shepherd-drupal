@@ -102,6 +102,30 @@
                 ],
                 "env": [
                   {
+                    "name": "MYSQL_USER",
+                    "value": "${MYSQL_USER}"
+                  },
+                  {
+                    "name": "MYSQL_PASSWORD",
+                    "value": "${MYSQL_PASSWORD}"
+                  },
+                  {
+                    "name": "MYSQL_DATABASE",
+                    "value": "${MYSQL_DATABASE}"
+                  },
+                  {
+                    "name": "DRUPAL_SERVICE_NAME",
+                    "value": "${DRUPAL_SERVICE_NAME}"
+                  },
+                  {
+                    "name": "DBHOST",
+                    "value": "${DBHOST}"
+                  },
+                  {
+                    "name": "HASH_SALT",
+                    "value": "${HASH_SALT}"
+                  },
+                  {
         "name": "DRUPAL_MODULES",
         "value": "${DRUPAL_MODULES}"
       },
@@ -156,6 +180,52 @@
       "name": "DRUPAL_SERVICE_NAME",
       "description": "Drupal service name.",
       "value": "drupal8"
+    },
+    {
+      "name": "DBHOST",
+      "description": "Drupal hostname.",
+      "value": "IPAddress",
+      "required": true
+    },
+    {
+      "name": "VOLUME_CAPACITY",
+      "description": "Volume space available for data, e.g. 512Mi, 2Gi",
+      "value": "10Gi",
+      "required": true
+    },
+    {
+      "name": "HASH_SALT",
+      "description": "Hash salt for settings file.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{74}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_ROOT_PASSWORD",
+      "description": "MySQL root password.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_USER",
+      "description": "MySQL database username.",
+      "generate": "expression",
+      "from": "user[A-Z0-9]{3}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_PASSWORD",
+      "description": "MySQL database user's password..",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_DATABASE",
+      "description": "MySQL database name.",
+      "required": true,
+      "value": "drupal"
     },
     {
       "name": "VOLUME_CAPACITY",

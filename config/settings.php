@@ -295,8 +295,8 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-#$settings['hash_salt'] = '';
-$settings['hash_salt'] = 'Uyo8IbKR_XMtOq_uQ_wddI8m5pH6F-KiLJs9EpcY_pzB5P-SnWZ_OtTYMgNFrY4YCy-nbucMNg';
+$settings['hash_salt'] = getenv('HASH_SALT'); 
+# 'ubme6uXWhdSFfdMNW4UDo09wCb4lTCEYrYtl5UsXFsf9y-GhNh6TVfl0VBrCZIwdmVoNjtMcNA';
 
 /**
  * Deployment identifier.
@@ -764,16 +764,16 @@ $settings['file_scan_ignore_directories'] = [
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
-
 $databases['default']['default'] = array (
   'database' => getenv('MYSQL_DATABASE'),
   'username' => getenv('MYSQL_USER'),
   'password' => getenv('MYSQL_PASSWORD'),
   'prefix' => '',
-  'host' => getenv('DB_HOST'),
+  'host' => getenv('DBHOST'),
   'port' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',                                                        
 );
-#$settings['install_profile'] = 'social';
-#$config_directories['sync'] = 'sites/default/files/config_xD8b2s6zQg7Jusv7NxSK36r3wj8aKW0ZULyO61wvIPASb_hXS6e5O5dwsS39aASUyu2uWz3vDg/sync';
+
+$settings['install_profile'] = 'social';
+$config_directories['sync'] = 'sites/default/files/config_dir/sync';

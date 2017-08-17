@@ -20,6 +20,12 @@ RUN locale-gen en_AU.UTF-8
 ENV LANG       en_AU.UTF-8
 ENV LC_ALL     en_AU.UTF-8
 
+ENV MYSQL_USER test1
+ENV MYSQL_PASSWORD test1
+ENV MYSQL_DATABASE test1
+ENV MYSQL_ROOT_PASSWORD test1
+ENV DBHOST test1
+
 # Upgrade all currently installed packages and install web server packages.
 RUN apt-get update \
 && apt-get -y install software-properties-common python-software-properties \
@@ -44,6 +50,10 @@ COPY ./files/apache2.conf /etc/apache2/apache2.conf
 # Added entrypoint.
 COPY ./entrypoint.sh /var/www/entrypoint.sh
 RUN chmod a+x /var/www/entrypoint.sh
+
+# Settings accepts dynamic variables.
+COPY ./config/settings.php /var/www/settings.php
+RUN chmod a+x /var/www/settings.php
 
 # PHP config.
 COPY ./files/php_custom.ini /etc/php/7.1/mods-available/php_custom.ini
