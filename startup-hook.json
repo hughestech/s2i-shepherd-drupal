@@ -16,12 +16,7 @@ spec:
     name: startup
   strategy:
     type: Rolling
-    rollingParams:
-      pre:
-        failurePolicy: Abort
-        execNewPod:
-          containerName: startup-hook 
-          command: [ "/var/www/entrypoint.sh"]  
+    rollingParams: 
       post:
         failurePolicy: Abort
         execNewPod:
