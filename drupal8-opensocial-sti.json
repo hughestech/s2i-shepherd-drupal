@@ -64,7 +64,7 @@
             "post": {
               "failurePolicy": "Abort",
                 "execNewPod": {
-                  "containerName": "${DRUPAL_SERVICE_NAME}-web",
+                  "containerName": "drupal-web",
                   "command": [
                     "/var/www/entrypoint.sh"
                 ]
