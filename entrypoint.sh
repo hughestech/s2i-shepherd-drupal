@@ -12,7 +12,3 @@ cd $DRUPAL_DIR
 	drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
 	echo "OpenSocial site is successfully installed."
 	drush cr
-	echo "Renaming config folder..."
-	mv /var/www/html/sites/default/files/config_* /var/www/html/sites/default/files/config_dir
-
-
