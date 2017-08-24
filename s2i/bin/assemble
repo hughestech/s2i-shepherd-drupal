@@ -42,9 +42,20 @@ if [ -f composer.json ]; then
       chmod g+rw /var/www/html/sites/default
   fi
 
+  echo "CD to drupal directory..."
+  echo
+  cd /var/www/html
+  echo "Checking path..."
+  pwd
+  echo "Runaning drush install..."
+  drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
+  echo "OpenSocial site is successfully installed."
+  drush cr
   echo "Copying settings file to drupal"
+  #chmod 775 /var/www/html/sites/default
+  chmod 664 /var/www/html/sites/default/settings.php
   cp /var/www/settings.php /var/www/html/sites/default
-
+  mv /var/www/html/sites/default/files/config_* /var/www/html/sites/default/files/config_dir
   echo "---> Cleaning up..."
   # Remove all .git directories to save space.
   find . -name .git -type d -exec rm -rf {} +
