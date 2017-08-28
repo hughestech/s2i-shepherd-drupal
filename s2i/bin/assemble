@@ -50,9 +50,14 @@ if [ -f composer.json ]; then
   #patch -p1 < 2260969_54\ 404\ on\ VirtualDocumentRoot\ with\ cs-js\ aggregation.patch
   
   echo "Installing Drupal..."
-  drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
-  echo "OpenSocial site is successfully installed."
-  drush cr
+
+  if drush status bootstrap | grep -q Successful
+  then
+    drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
+  else
+      # code if not found
+    echo "Installation failed!"
+  fi
 
   echo "Copying settings file to drupal"
   #chmod 775 /var/www/html/sites/default
