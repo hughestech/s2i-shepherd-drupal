@@ -5,6 +5,7 @@ echo "CD to Drupal directory"
 cd $DRUPAL_DIR
 echo "Checking current directory..."
 pwd
+
 if drush status bootstrap | grep -q Successful
 then
 	echo "Installing Drupal..."
