@@ -32,6 +32,6 @@ docker rm -f mysql_database
 docker network rm $DBHOST
 
 #Listing docker network, container and images
-docker network ls
-docker images
-docker ps
+#docker network ls
+#docker images
+#docker ps

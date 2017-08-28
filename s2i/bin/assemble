@@ -46,17 +46,14 @@ if [ -f composer.json ]; then
   cd /var/www/html
   echo "Checking current directory..."
   pwd
-  wget https://www.drupal.org/files/issues/2260969_54%20404%20on%20VirtualDocumentRoot%20with%20cs-js%20aggregation.patch
-  patch -p1 < 2260969_54\ 404\ on\ VirtualDocumentRoot\ with\ cs-js\ aggregation.patch
-  if  drush status bootstrap | grep -q Successful
-  then
-    echo "Installing Drupal..."
-    drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
-    echo "OpenSocial site is successfully installed."
-    drush cr
-  else
-    echo "Installation failed!"
-  fi
+  #wget https://www.drupal.org/files/issues/2260969_54%20404%20on%20VirtualDocumentRoot%20with%20cs-js%20aggregation.patch
+  #patch -p1 < 2260969_54\ 404\ on\ VirtualDocumentRoot\ with\ cs-js\ aggregation.patch
+  
+  echo "Installing Drupal..."
+  drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
+  echo "OpenSocial site is successfully installed."
+  drush cr
+
   echo "Copying settings file to drupal"
   #chmod 775 /var/www/html/sites/default
   chmod 664 /var/www/html/sites/default/settings.php
