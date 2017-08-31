@@ -51,13 +51,15 @@ if [ -f composer.json ]; then
   #patch -p1 < 2260969_54\ 404\ on\ VirtualDocumentRoot\ with\ cs-js\ aggregation.patch
     
   echo "Installing Drupal..."
-  drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
+  drush -y -v site-install lightning --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
 
   echo "Copying settings file to drupal"
   #chmod 775 /var/www/html/sites/default
   chmod 664 /var/www/html/sites/default/settings.php
   cp /var/www/settings.php /var/www/html/sites/default
   mv /var/www/html/sites/default/files/config_* /var/www/html/sites/default/files/config_dir
+
+  drush cr
   echo "---> Cleaning up..."
   # Remove all .git directories to save space.
   find . -name .git -type d -exec rm -rf {} +
