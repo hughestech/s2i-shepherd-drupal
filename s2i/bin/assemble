@@ -56,9 +56,10 @@ if [ -f composer.json ]; then
 
   echo "Copying settings file to drupal"
   #chmod 775 /var/www/html/sites/default
-  chmod 664 /var/www/html/sites/default/settings.php
-  cp /var/www/settings.php /var/www/html/sites/default
-  mv /var/www/html/sites/default/files/config_* /var/www/html/sites/default/files/config_dir
+  #chmod 664 /var/www/html/sites/default/settings.php
+  #cp /var/www/settings.php /var/www/html/sites/default
+  #mv /var/www/html/sites/default/files/config_* /var/www/html/sites/default/files/config_dir
+  ls -als /var/www/html/sites/default/files/
 
   echo "---> Cleaning up..."
   # Remove all .git directories to save space.
