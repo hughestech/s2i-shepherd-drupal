@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "drupal8-mysql",
+    "name": "lightning-mysql",
     "creationTimestamp": null,
     "annotations": {
       "description": "MySQL as database.",
