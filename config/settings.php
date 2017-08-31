@@ -764,6 +764,7 @@ $settings['file_scan_ignore_directories'] = [
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+$config_directories['sync'] = '../config/sync';
 $databases['default']['default'] = array (
   'database' => getenv('MYSQL_DATABASE'),
   'username' => getenv('MYSQL_USER'),
@@ -775,5 +776,4 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',                                                        
 );
 
-$settings['install_profile'] = 'social';
-$config_directories['sync'] = 'sites/default/files/config_dir/sync';
+$settings['install_profile'] = 'commerce_base';
