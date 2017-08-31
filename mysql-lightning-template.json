@@ -12,6 +12,31 @@
   },
   "objects": [
     {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${DRUPAL_SERVICE_NAME}-db",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "database",
+            "protocol": "TCP",
+            "port": 3306,
+            "targetPort": "${DRUPAL_SERVICE_NAME}-db",
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "name": "${DRUPAL_SERVICE_NAME}-db"
+        },
+        "portalIP": "",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    },
+    {
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
@@ -123,22 +148,9 @@
       "value": "drupal8-lightning"
     },
     {
-      "name": "DBHOST",
-      "description": "Drupal hostname.",
-      "value": "IPAddress",
-      "required": true
-    },
-    {
       "name": "VOLUME_CAPACITY",
       "description": "Volume space available for data, e.g. 512Mi, 2Gi",
       "value": "10Gi",
-      "required": true
-    },
-    {
-      "name": "HASH_SALT",
-      "description": "Hash salt for settings file.",
-      "generate": "expression",
-      "from": "[a-zA-Z0-9]{74}",
       "required": true
     },
     {
@@ -167,24 +179,6 @@
       "description": "MySQL database name.",
       "required": true,
       "value": "drupal"
-    },
-    {
-      "name": "VOLUME_CAPACITY",
-      "description": "Volume space available for data, e.g. 512Mi, 2Gi",
-      "value": "10Gi",
-      "required": true
-    },
-    {
-     "name": "DRUPAL_MODULES",
-     "description": "Comma separated Drupal modules to install.",
-     "required": false,
-     "value": "ctools;pathauto;token;imce;honeypot;yamlform;mailsystem;smtp;paragraphs;entity;entity_reference_revisions;xmlsitemap;google_analytics;metatag;background_image_formatter;advagg;menu_block;redirect;rules;google_tag;fontyourface;hotjar;colorbox;bootstrap;adminimal_theme"
-    },
-    {
-     "name": "DRUPAL_THEMES",
-     "description": "Comma separated Drupal themes to install.",
-     "required": false,
-     "value": "bootstrap;adminimal_theme"
     }
   ],
   "labels": {

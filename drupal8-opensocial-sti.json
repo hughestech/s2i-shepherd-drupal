@@ -228,12 +228,6 @@
       "value": "drupal"
     },
     {
-      "name": "VOLUME_CAPACITY",
-      "description": "Volume space available for data, e.g. 512Mi, 2Gi",
-      "value": "10Gi",
-      "required": true
-    },
-    {
      "name": "DRUPAL_MODULES",
      "description": "Comma separated Drupal modules to install.",
      "required": false,
