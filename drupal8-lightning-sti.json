@@ -40,7 +40,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "drupal",
+        "name": "${DRUPAL_SERVICE_NAME}",
         "creationTimestamp": null
       },
       "spec": {
