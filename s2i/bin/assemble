@@ -47,8 +47,8 @@ if [ -f composer.json ]; then
   echo "Checking current directory..."
   pwd
 
-  wget https://www.drupal.org/files/issues/2260969_54%20404%20on%20VirtualDocumentRoot%20with%20cs-js%20aggregation.patch
-  patch -p1 < 2260969_54\ 404\ on\ VirtualDocumentRoot\ with\ cs-js\ aggregation.patch
+  #wget https://www.drupal.org/files/issues/2260969_54%20404%20on%20VirtualDocumentRoot%20with%20cs-js%20aggregation.patch
+  #patch -p1 < 2260969_54\ 404\ on\ VirtualDocumentRoot\ with\ cs-js\ aggregation.patch
     
   echo "Installing Drupal..."
   drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
