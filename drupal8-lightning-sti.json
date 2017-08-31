@@ -179,7 +179,7 @@
     {
       "name": "DRUPAL_SERVICE_NAME",
       "description": "Drupal service name.",
-      "value": "drupal8-lightning"
+      "value": "lightning"
     },
     {
       "name": "DBHOST",
