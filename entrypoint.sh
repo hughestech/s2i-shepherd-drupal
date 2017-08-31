@@ -10,8 +10,8 @@ if drush status bootstrap | grep -q Successful
 then
 	echo "Installing Drupal..."
     #drush -y site-install --db-url=mysql://userTY4:2Hi6AIPPRdfP0XLQ@10.128.1.126/drupal
-	drush -y -v site-install lightning --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE} --site-name=Lightning
-	echo "OpenSocial site is successfully installed."
+	drush -y -v site-install --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${DBHOST}/${MYSQL_DATABASE}
+	echo "Lightning is successfully installed."
 	drush cr
 else
     echo "Installation failed!"
