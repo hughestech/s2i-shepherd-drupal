@@ -775,5 +775,5 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',                                                        
 );
 
-$settings['install_profile'] = 'social';
+$settings['install_profile'] = getenv('INSTALL_PROFILE');
 $config_directories['sync'] = 'sites/default/files/config_dir/sync';
