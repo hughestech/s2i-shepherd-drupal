@@ -58,8 +58,6 @@ if [ -f composer.json ]; then
   chmod 664 /var/www/html/sites/default/settings.php
   cp /var/www/settings.php /var/www/html/sites/default
   mv /var/www/html/sites/default/files/config_* /var/www/html/sites/default/files/config_dir
-
-  drush cr
   
   echo "---> Cleaning up..."
   # Remove all .git directories to save space.
