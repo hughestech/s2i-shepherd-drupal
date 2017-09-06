@@ -1,0 +1,31 @@
+{
+  "kind": "BuildConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "opensocial-build"
+  },
+  "spec": {
+    "source": { 
+      "type": "Git",
+      "git": {
+        "uri": "https://github.com/johnreytanquinco/s2i-shepherd-drupal",
+        "ref": "develop"
+      }
+    },
+    "strategy": { 
+      "type": "Source",
+      "sourceStrategy": {
+        "from": {
+          "kind": "DockerImage",
+          "name": "drupals2ibuilder:latest"
+        }
+      }
+    },
+    "output": { 
+      "to": {
+        "kind": "DockerImage",
+        "name": "hughestech/opensocial:latest"
+      }
+    }
+  }
+}
