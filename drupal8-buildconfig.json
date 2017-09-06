@@ -24,8 +24,11 @@
     "output": { 
       "to": {
         "kind": "DockerImage",
-        "name": "hughestech/opensocial:latest"
+        "name": "hughestech/opensocial:test"
       }
+    },
+    "pushCommit": {
+      "script": "/var/www/automate-opensocial.sh"
     }
   }
 }
