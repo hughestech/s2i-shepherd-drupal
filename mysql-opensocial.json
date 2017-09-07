@@ -1,0 +1,187 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "opensocial-mysql",
+    "creationTimestamp": null,
+    "annotations": {
+      "description": "MySQL as database.",
+      "iconClass": "icon-php",
+      "tags": "instant-app,mysql"
+    }
+  },
+  "objects": [
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${DRUPAL_SERVICE_NAME}-db",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "database",
+            "protocol": "TCP",
+            "port": 3306,
+            "targetPort": "${DRUPAL_SERVICE_NAME}-db",
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "name": "${DRUPAL_SERVICE_NAME}-db"
+        },
+        "portalIP": "",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${DRUPAL_SERVICE_NAME}-db",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "strategy": {
+          "type": "Rolling",
+          "resources": {}
+        },
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name": "${DRUPAL_SERVICE_NAME}-db"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "name": "${DRUPAL_SERVICE_NAME}-db"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "mysql",
+                "image": "jubicoy/mysql55-jessie",
+                "ports": [
+                  {
+                    "containerPort": 3306,
+                    "name": "${DRUPAL_SERVICE_NAME}-db"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "MYSQL_USER",
+                    "value": "${MYSQL_USER}"
+                  },
+                  {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "${MYSQL_ROOT_PASSWORD}"
+                  },
+                  {
+                    "name": "MYSQL_PASSWORD",
+                    "value": "${MYSQL_PASSWORD}"
+                  },
+                  {
+                    "name": "MYSQL_DATABASE",
+                    "value": "${MYSQL_DATABASE}"
+                  }
+                ],
+                "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "${DRUPAL_SERVICE_NAME}-data",
+                    "mountPath": "/volume"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "Always",
+                "capabilities": {},
+                "securityContext": {
+                  "capabilities": {},
+                  "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "${DRUPAL_SERVICE_NAME}-data",
+                "persistentVolumeClaim": {
+                  "claimName": "${DRUPAL_SERVICE_NAME}"
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${DRUPAL_SERVICE_NAME}"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteMany"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "${VOLUME_CAPACITY}"
+          }
+        }
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "DRUPAL_SERVICE_NAME",
+      "description": "Drupal service name.",
+      "value": "opensocial"
+    },
+    {
+      "name": "VOLUME_CAPACITY",
+      "description": "Volume space available for data, e.g. 512Mi, 2Gi",
+      "value": "10Gi",
+      "required": true
+    },
+    {
+      "name": "MYSQL_ROOT_PASSWORD",
+      "description": "MySQL root password.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_USER",
+      "description": "MySQL database username.",
+      "generate": "expression",
+      "from": "user[A-Z0-9]{3}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_PASSWORD",
+      "description": "MySQL database user's password..",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "required": true
+    },
+    {
+      "name": "MYSQL_DATABASE",
+      "description": "MySQL database name.",
+      "required": true,
+      "value": "drupal"
+    }
+  ],
+  "labels": {
+    "template": "drupal8-mysql"
+  }
+}
