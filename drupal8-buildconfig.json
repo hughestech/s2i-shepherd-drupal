@@ -24,7 +24,7 @@
     "output": { 
       "to": {
         "kind": "DockerImage",
-        "name": "hughestech/opensocial:test"
+        "name": "hughestech/opensocial:v1.1"
       }
     },
     "pushCommit": {

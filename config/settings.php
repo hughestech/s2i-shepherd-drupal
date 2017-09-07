@@ -592,6 +592,8 @@ if ($settings['hash_salt']) {
  * issues.
  */
 
+curl.cainfo='/var/www/cacert.pem'
+
 /**
  * If you encounter a situation where users post a large amount of text, and
  * the result is stripped out upon viewing but can still be edited, Drupal's
