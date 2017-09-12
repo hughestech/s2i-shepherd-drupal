@@ -64,6 +64,9 @@ COPY ./s2i/bin /usr/local/s2i
 RUN chmod +x /usr/local/s2i/*
 ENV PATH "$PATH:/usr/local/s2i"
 
+# Fix permissions
+RUN chown -R 1001:0 /var/www && fix-permissions /var/www
+
 # Add startup script
 ADD entrypoint.sh /var/www/entrypoint.sh
 RUN chmod a+x /var/www/entrypoint.sh
