@@ -47,4 +47,4 @@ fi
 
 #cp opensocial/html/sites/default/default.settings.php opensocial/html/sites/default/settings.php
 #mkdir -m 755 opensocial/html/sites/default/files
-fix-permissions ./
+fix-permissions .
