@@ -19,12 +19,14 @@ if [ "${PUBLIC_DIR}" ]; then
   if [ ! -h /var/www/${PUBLIC_DIR} ]; then
     ln -sf /shared/public /var/www/${PUBLIC_DIR}
   fi
+  echo "PUBLIC DIR"
   #chown -R www-data:www-data /shared/public
 fi
 
 # If $PRIVATE_DIR is set, ensure it exists and has correct permissions.
 if [ "${PRIVATE_DIR}" ]; then
   mkdir -p ${PRIVATE_DIR}
+  echo "PRIVATE DIR"
   chown -R www-data:www-data ${PRIVATE_DIR}
 fi
 
