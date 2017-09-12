@@ -53,7 +53,7 @@ RUN a2enmod rewrite \
 # Add /code /shared directories and ensure ownership by web user.
 RUN mkdir -p /code /shared && chown www-data:www-data /code /shared
 RUN mkdir -p /var/www && chown www-data:www-data /var/www
-RUN chown -R 1001:1001 /var/www
+RUN chown -R 1001:0 /var/www
 
 # Add in bootstrap script.
 COPY ./files/apache2-foreground /apache2-foreground
@@ -72,7 +72,7 @@ RUN chmod a+x /var/www/entrypoint.sh
 EXPOSE 8080
 
 # Set working directory.
-#WORKDIR /var/www
+WORKDIR /var/www
 
 USER 1001
 
