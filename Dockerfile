@@ -5,7 +5,7 @@ MAINTAINER Casey Fulton <casey.fulton@adelaide.edu.au>
 
 LABEL io.k8s.description="Platform for serving Drupal PHP apps in Shepherd" \
       io.k8s.display-name="Shepherd Drupal" \
-      io.openshift.expose-services="80:http" \
+      io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,shepherd,drupal,php,apache" \
       io.openshift.s2i.scripts-url="image:///usr/local/s2i"
 
@@ -69,7 +69,7 @@ ADD entrypoint.sh /var/www/entrypoint.sh
 RUN chmod a+x /var/www/entrypoint.sh
 
 # Web port.
-EXPOSE 80
+EXPOSE 8080
 
 # Set working directory.
 #WORKDIR /var/www
